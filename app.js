@@ -132,7 +132,7 @@ function playStream(url, title, artist, id, isLocal = false) {
         navigator.mediaSession.metadata = new MediaMetadata({
             title: title,
             artist: artist,
-            album: isLocal ? 'Сохраненные (Offline)' : 'Hitmotop Search'
+            album: isLocal ? 'РЎРѕС…СЂР°РЅРµРЅРЅС‹Рµ (Offline)' : 'Hitmotop Search'
         });
     }
 }
@@ -165,11 +165,11 @@ function renderTrackItem(track, isLocal, containerElement) {
     // Action Icon based on state
     let actionHtml = '';
     if (isLocal) {
-        actionHtml = `<button class="action-btn" onclick="deleteLocal('${track.id}')" aria-label="Удалить">
+        actionHtml = `<button class="action-btn" onclick="deleteLocal('${track.id}')" aria-label="РЈРґР°Р»РёС‚СЊ">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
         </button>`;
     } else {
-        actionHtml = `<button class="action-btn" id="dl-${uniqueId}" onclick="downloadTrack('${uniqueId}', '${track.url}', '${track.title.replace(/'/g, "\\'")}', '${track.artist.replace(/'/g, "\\'")}', '${track.duration}')" aria-label="Скачать">
+        actionHtml = `<button class="action-btn" id="dl-${uniqueId}" onclick="downloadTrack('${uniqueId}', '${track.url}', '${track.title.replace(/'/g, "\\'")}', '${track.artist.replace(/'/g, "\\'")}', '${track.duration}')" aria-label="РЎРєР°С‡Р°С‚СЊ">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
         </button>`;
     }
@@ -180,7 +180,7 @@ function renderTrackItem(track, isLocal, containerElement) {
         </div>
         <div class="track-item-info" onclick="play${isLocal ? 'Local' : 'Remote'}('${uniqueId}', '${isLocal ? track.id : track.url}', '${track.title.replace(/'/g, "\\'")}', '${track.artist.replace(/'/g, "\\'")}')">
             <h4>${track.title}</h4>
-            <p>${track.artist}  •  ${track.duration || '0:00'}</p>
+            <p>${track.artist}  вЂў  ${track.duration || '0:00'}</p>
         </div>
         ${actionHtml}
     `;
@@ -202,12 +202,12 @@ window.playLocal = async function (id, dbId, title, artist) {
             playStream(blobUrl, title, artist, id, true);
         }
     } catch (e) {
-        alert("Ошибка чтения файла");
+        alert("РћС€РёР±РєР° С‡С‚РµРЅРёСЏ С„Р°Р№Р»Р°");
     }
 };
 
 window.deleteLocal = async function (id) {
-    if (confirm("Удалить этот трек?")) {
+    if (confirm("РЈРґР°Р»РёС‚СЊ СЌС‚РѕС‚ С‚СЂРµРє?")) {
         await deleteTrackLocal(id);
         loadSavedTracks();
     }
@@ -234,7 +234,7 @@ window.downloadTrack = async function (btnId, url, title, artist, duration) {
         btn.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>`;
 
     } catch (e) {
-        alert("Не удалось скачать");
+        alert("РќРµ СѓРґР°Р»РѕСЃСЊ СЃРєР°С‡Р°С‚СЊ");
         btn.disabled = false;
         btn.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>`;
     }
@@ -276,7 +276,7 @@ async function performSearch(query) {
         elements.searchLoading.style.display = 'none';
 
         if (results.length === 0) {
-            elements.searchTrackList.innerHTML = '<div class="empty-state">Ничего не найдено</div>';
+            elements.searchTrackList.innerHTML = '<div class="empty-state">РќРёС‡РµРіРѕ РЅРµ РЅР°Р№РґРµРЅРѕ</div>';
         } else {
             // Deduplicate URLs
             const seen = new Set();
@@ -292,7 +292,7 @@ async function performSearch(query) {
     } catch (e) {
         console.error(e);
         elements.searchLoading.style.display = 'none';
-        elements.searchTrackList.innerHTML = `<div class="empty-state">Ошибка поиска. Возможно прокси недоступен.</div>`;
+        elements.searchTrackList.innerHTML = `<div class="empty-state">РћС€РёР±РєР° РїРѕРёСЃРєР°. Р’РѕР·РјРѕР¶РЅРѕ РїСЂРѕРєСЃРё РЅРµРґРѕСЃС‚СѓРїРµРЅ.</div>`;
     }
 }
 
@@ -316,10 +316,10 @@ navItems.forEach(item => {
         document.getElementById(targetId).style.display = 'block';
 
         if (targetId === 'tab-home') {
-            document.getElementById('header-title').textContent = 'Моя музыка';
+            document.getElementById('header-title').textContent = 'РњРѕСЏ РјСѓР·С‹РєР°';
             loadSavedTracks(); // Refresh DB view every time we open tab
         } else {
-            document.getElementById('header-title').textContent = 'Поиск музыки';
+            document.getElementById('header-title').textContent = 'РџРѕРёСЃРє РјСѓР·С‹РєРё';
         }
     });
 });
