@@ -1,4 +1,4 @@
-const CACHE_NAME = 'deltamusic-v1';
+const CACHE_NAME = 'deltamusic-v2';
 const urlsToCache = [
     './',
     './index.html',
