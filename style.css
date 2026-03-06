@@ -1,0 +1,213 @@
+:root {
+    --bg-color: #0d0d12;
+    --text-primary: #ffffff;
+    --text-secondary: #aaaaaa;
+    --accent-color: #ff2d55;
+    --glass-bg: rgba(25, 25, 30, 0.65);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    background-image: radial-gradient(circle at 50% 0%, rgba(255, 45, 85, 0.15) 0%, var(--bg-color) 70%);
+    color: var(--text-primary);
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    height: 100dvh;
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--bg-color);
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+/* Glassmorphism helpers */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-top: 1px solid var(--glass-border);
+}
+
+/* Header */
+.glass-header {
+    background: rgba(13, 13, 18, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: env(safe-area-inset-top, 40px) 20px 15px;
+    border-bottom: 1px solid var(--glass-border);
+    position: relative;
+    z-index: 10;
+}
+
+h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+/* Main Content */
+.content-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px 20px calc(110px + env(safe-area-inset-bottom, 20px));
+}
+
+.track-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.track-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: pointer;
+}
+
+.track-item:active {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(0.97);
+}
+
+.track-item-art {
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
+    background: #222;
+    margin-right: 15px;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.track-item-info {
+    flex: 1;
+    overflow: hidden;
+}
+
+.track-item-info h4 {
+    margin: 0 0 4px;
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.track-item-info p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Player Bar */
+.player-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 15px 20px calc(15px + env(safe-area-inset-bottom, 20px));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px 20px 0 0;
+}
+
+.player-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+    overflow: hidden;
+}
+
+.track-artwork {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--accent-color), #8a2387);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    flex-shrink: 0;
+    background-size: cover;
+    background-position: center;
+}
+
+.track-details {
+    overflow: hidden;
+}
+
+.track-details h3 {
+    margin: 0 0 4px;
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.track-details p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.control-btn {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s;
+}
+
+.control-btn:active {
+    transform: scale(0.85);
+}
+
+.play-btn {
+    background: rgba(255, 255, 255, 0.15);
+    width: 52px;
+    height: 52px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.play-btn:active {
+    background: rgba(255, 255, 255, 0.25);
+}
